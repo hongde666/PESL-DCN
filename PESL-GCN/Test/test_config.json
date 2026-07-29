@@ -1,0 +1,50 @@
+{
+  "test_pipeline": {
+    "task_name": "Biomedical_Event_Detection",
+    "dataset": "MLEE",
+    "model_name": "PESL-GCN",
+    "seed": 42,
+    "device": "cuda"
+  },
+  "paths": {
+    "data_dir": "./data/clue",
+    "exp_dir": "./experiments/clue",
+    "pretrained_model_path": "./pretrained_bert_models",
+    "checkpoint_path": "./experiments/clue/best_pesl_gcn_mlee.pt",
+    "test_data_path": "./data/clue/test.npz",
+    "output_error_analysis_path": "./experiments/clue/test_error_analysis.json",
+    "log_file_path": "./experiments/clue/test_evaluation.log"
+  },
+  "eval_hyperparameters": {
+    "batch_size": 16,
+    "max_seq_len": 128,
+    "adaptive_threshold": 0.25,
+    "ignore_index": -100,
+    "focal_gamma": 2.0,
+    "w_pos": 2.0,
+    "w_neg": 0.2
+  },
+  "metrics_settings": {
+    "primary_metric": "f1_score",
+    "evaluation_mode": "strict_span",
+    "track_confusion_matrix": true,
+    "export_error_cases": true,
+    "confidence_rounding": 4
+  },
+  "label_schema": {
+    "num_classes": 21,
+    "labels": [
+      "O",
+      "B-Anatomical", "I-Anatomical",
+      "B-Molecular", "I-Molecular",
+      "B-General", "I-General",
+      "B-Planned", "I-Planned",
+      "B-Phosphorylation", "I-Phosphorylation",
+      "B-Gene_expression", "I-Gene_expression",
+      "B-Binding", "I-Binding",
+      "B-Localization", "I-Localization",
+      "B-Regulation", "I-Regulation",
+      "B-Transcription", "I-Transcription"
+    ]
+  }
+}
